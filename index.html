@@ -13,19 +13,19 @@
    TOKENS & BASE
 ═══════════════════════════════════════════ */
     :root {
-      --bg: #0C1610;
-      --surface: #111D16;
-      --card: #162218;
+      --bg: #FFFFFF;
+      --surface: #F8FAF9;
+      --card: #FFFFFF;
       --border: rgba(22, 160, 134, .15);
       --border-h: rgba(22, 160, 134, .35);
       --kt: #16A086;
       --ktl: #1AC0A0;
-      --ktd: #0E7A66;
-      --gold: #C5A059;
-      --goldl: #D4B470;
-      --muted: #5A7A68;
-      --text: #D8EDE6;
-      --text2: #8AAFA0;
+      --ktd: #128B74;
+      --gold: #16A086;
+      --goldl: #1AC0A0;
+      --muted: #5C7063;
+      --text: #0A1A0E;
+      --text2: #1A1A1A;
       --serif: 'Cormorant Garamond', serif;
       --sans: 'DM Sans', sans-serif;
       --mono: 'DM Mono', monospace;
@@ -50,6 +50,16 @@
       overflow: hidden;
       height: 100vh;
       cursor: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      pointer-events: none;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
     /* ─── CURSOR ─── */
@@ -131,7 +141,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, .5);
+      box-shadow: 0 40px 80px rgba(22, 160, 134, .15);
       animation: loginIn .8s ease both;
     }
 
