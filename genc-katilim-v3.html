@@ -1,0 +1,2623 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genç Katılım — Kuveyt Türk</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+   TOKENS & BASE
+═══════════════════════════════════════════ */
+    :root {
+      --bg: #0C1610;
+      --surface: #111D16;
+      --card: #162218;
+      --border: rgba(22, 160, 134, .15);
+      --border-h: rgba(22, 160, 134, .35);
+      --kt: #16A086;
+      --ktl: #1AC0A0;
+      --ktd: #0E7A66;
+      --gold: #C5A059;
+      --goldl: #D4B470;
+      --muted: #5A7A68;
+      --text: #D8EDE6;
+      --text2: #8AAFA0;
+      --serif: 'Cormorant Garamond', serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      font-size: 16px
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow: hidden;
+      height: 100vh;
+      cursor: none;
+    }
+
+    /* ─── CURSOR ─── */
+    #cur {
+      width: 7px;
+      height: 7px;
+      background: var(--kt);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform .12s, background .2s
+    }
+
+    #curl {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(22, 160, 134, .4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: width .2s, height .2s, border-color .2s
+    }
+
+    body:has(button:hover) #cur,
+    body:has(a:hover) #cur {
+      transform: translate(-50%, -50%) scale(2.8);
+      background: var(--ktl);
+      opacity: .5
+    }
+
+    body:has(button:hover) #curl,
+    body:has(a:hover) #curl {
+      width: 14px;
+      height: 14px;
+      border-color: var(--ktl)
+    }
+
+    /* ─── GLOBAL SCROLLBAR ─── */
+    ::-webkit-scrollbar {
+      width: 3px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg)
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(22, 160, 134, .3);
+      border-radius: 2px
+    }
+
+    /* ═══════════════════════════════════════════
+   LOGIN SCREEN
+═══════════════════════════════════════════ */
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    #login-screen.out {
+      opacity: 0;
+      transform: scale(.97);
+      pointer-events: none
+    }
+
+    .login-box {
+      width: 420px;
+      padding: 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .5);
+      animation: loginIn .8s ease both;
+    }
+
+    @keyframes loginIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem
+    }
+
+    .login-logo img {
+      height: 26px;
+      width: auto
+    }
+
+    .login-logo-sep {
+      width: 1px;
+      height: 22px;
+      background: var(--border)
+    }
+
+    .login-logo-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text2);
+      letter-spacing: .03em
+    }
+
+    .login-logo-name em {
+      font-style: normal;
+      color: var(--kt)
+    }
+
+    .login-h {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .login-sub {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.5
+    }
+
+    .field {
+      margin-bottom: 1.2rem
+    }
+
+    .field label {
+      display: block;
+      font-size: .7rem;
+      font-family: var(--mono);
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: .5rem
+    }
+
+    .field input {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .field input:focus {
+      border-color: var(--kt)
+    }
+
+    .field input::placeholder {
+      color: var(--muted)
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: .85rem;
+      background: var(--kt);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: .88rem;
+      cursor: none;
+      transition: background .2s, transform .15s;
+      letter-spacing: .04em;
+      margin-top: .4rem;
+    }
+
+    .btn-login:hover {
+      background: var(--ktd);
+      transform: translateY(-1px)
+    }
+
+    .btn-login:active {
+      transform: translateY(0)
+    }
+
+    .login-note {
+      margin-top: 1.5rem;
+      padding: .75rem 1rem;
+      background: rgba(22, 160, 134, .05);
+      border: 1px solid rgba(22, 160, 134, .1);
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: rgba(22, 160, 134, .5);
+      letter-spacing: .06em;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+   DASHBOARD LAYOUT
+═══════════════════════════════════════════ */
+    #dashboard {
+      display: none;
+      height: 100vh;
+      grid-template-columns: 240px 1fr;
+      grid-template-rows: 56px 1fr;
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar content";
+      opacity: 0;
+      transition: opacity .5s ease;
+    }
+
+    #dashboard.visible {
+      display: grid;
+      opacity: 1
+    }
+
+    /* ─── TOPBAR ─── */
+    #topbar {
+      grid-area: topbar;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    .tb-page-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text)
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem
+    }
+
+    .kt-score-pill {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .35rem 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+    }
+
+    .score-label {
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase
+    }
+
+    .score-val {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ktl)
+    }
+
+    .score-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--border)
+    }
+
+    .league-badge {
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .12em;
+      color: var(--gold);
+      border: 1px solid rgba(197, 160, 89, .3);
+      padding: .25rem .6rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: .7rem
+    }
+
+    .user-av {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ktd), var(--kt));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: .6rem;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .user-name {
+      font-size: .8rem;
+      color: var(--text2)
+    }
+
+    /* ─── SIDEBAR ─── */
+    #sidebar {
+      grid-area: sidebar;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 0;
+      overflow-y: auto;
+    }
+
+    .sb-brand {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.2rem;
+    }
+
+    .sb-brand img {
+      height: 22px;
+      width: auto
+    }
+
+    .sb-brand-name {
+      font-family: var(--serif);
+      font-size: .9rem;
+      color: var(--text2);
+      letter-spacing: .02em
+    }
+
+    .sb-brand-name em {
+      font-style: normal;
+      color: var(--kt)
+    }
+
+    .sb-section-label {
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding: .5rem 1.5rem .4rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .7rem 1.5rem;
+      cursor: none;
+      border-left: 2px solid transparent;
+      transition: background .2s, border-color .2s, color .2s;
+      font-size: .85rem;
+      color: var(--text2);
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      background: rgba(22, 160, 134, .04);
+      color: var(--text)
+    }
+
+    .nav-item.active {
+      background: rgba(22, 160, 134, .07);
+      border-left-color: var(--kt);
+      color: var(--text);
+    }
+
+    .nav-item .nav-ic {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: .5rem;
+      letter-spacing: .08em;
+      background: rgba(22, 160, 134, .15);
+      color: var(--kt);
+      padding: .15rem .45rem;
+      border-radius: 2px;
+    }
+
+    .nav-badge.new {
+      background: rgba(197, 160, 89, .15);
+      color: var(--gold)
+    }
+
+    .sb-footer {
+      margin-top: auto;
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .sb-ver {
+      font-family: var(--mono);
+      font-size: .55rem;
+      color: rgba(90, 122, 104, .4);
+      letter-spacing: .08em
+    }
+
+    /* ─── CONTENT ─── */
+    #content {
+      grid-area: content;
+      overflow-y: auto;
+      padding: 2rem;
+      background: var(--bg);
+      position: relative;
+    }
+
+    /* ─── PANELS ─── */
+    .panel {
+      display: none;
+      animation: panelIn .4s ease both
+    }
+
+    .panel.active {
+      display: block
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .panel-h {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .panel-sub {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 2rem
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: HOME DASHBOARD
+═══════════════════════════════════════════ */
+    .home-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem
+    }
+
+    .home-card {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color .25s, transform .25s;
+      cursor: none;
+    }
+
+    .home-card:hover {
+      border-color: var(--border-h);
+      transform: translateY(-2px)
+    }
+
+    .home-card-ic {
+      font-size: 1.5rem;
+      margin-bottom: 1rem
+    }
+
+    .home-card-n {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ktl);
+      margin-bottom: .3rem;
+    }
+
+    .home-card-n.gold {
+      color: var(--gold)
+    }
+
+    .home-card-lbl {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .home-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1rem
+    }
+
+    .quick-actions {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .qa-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--kt);
+      margin-bottom: 1rem
+    }
+
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem
+    }
+
+    .qa-item {
+      display: flex;
+      align-items: center;
+      gap.8rem;
+      gap: .8rem;
+      padding: .85rem 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: none;
+      font-size: .82rem;
+      color: var(--text2);
+      transition: border-color .2s, color .2s;
+    }
+
+    .qa-item:hover {
+      border-color: var(--border-h);
+      color: var(--text)
+    }
+
+    .qa-item-ic {
+      font-size: 1rem;
+      flex-shrink: 0
+    }
+
+    .qa-item-arr {
+      margin-left: auto;
+      color: var(--kt);
+      font-size: .8rem
+    }
+
+    .recent-activity {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .ra-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--kt);
+      margin-bottom: 1rem
+    }
+
+    .act-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid rgba(22, 160, 134, .06);
+    }
+
+    .act-item:last-child {
+      border-bottom: none
+    }
+
+    .act-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--kt);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .act-dot.gold {
+      background: var(--gold)
+    }
+
+    .act-dot.dim {
+      background: var(--muted);
+      opacity: .4
+    }
+
+    .act-t {
+      font-size: .78rem;
+      color: var(--text);
+      margin-bottom: .15rem
+    }
+
+    .act-d {
+      font-family: var(--mono);
+      font-size: .56rem;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: FİNANS AKADEMİ
+═══════════════════════════════════════════ */
+    .akademi-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 1.5rem
+    }
+
+    .video-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .video-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0a1a12, #0e2018);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: none;
+    }
+
+    .video-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, .7));
+    }
+
+    .video-play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(22, 160, 134, .9);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      transition: transform .2s, background .2s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .video-play-btn:hover {
+      background: var(--kt);
+      transform: scale(1.08)
+    }
+
+    .video-play-btn svg {
+      fill: #fff;
+      width: 24px;
+      height: 24px;
+      margin-left: 4px
+    }
+
+    .video-progress-bar {
+      width: 90%;
+      height: 3px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 2px;
+      position: absolute;
+      bottom: 24px;
+      z-index: 2;
+    }
+
+    .video-progress-fill {
+      height: 100%;
+      background: var(--kt);
+      border-radius: 2px;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    .video-meta {
+      padding: 1.2rem 1.5rem
+    }
+
+    .video-episode {
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: var(--kt);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .4rem
+    }
+
+    .video-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .video-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 1rem
+    }
+
+    .video-reward {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(22, 160, 134, .07);
+      border: 1px solid rgba(22, 160, 134, .2);
+      border-radius: 3px;
+      padding: .35rem .8rem;
+      font-family: var(--mono);
+      font-size: .6rem;
+      color: var(--kt);
+      letter-spacing: .08em;
+    }
+
+    .btn-watch {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 100%;
+      margin-top: 1rem;
+      padding: .8rem 1.2rem;
+      background: var(--kt);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: .84rem;
+      font-weight: 600;
+      cursor: none;
+      transition: background .2s;
+      justify-content: center;
+      font-family: var(--sans);
+    }
+
+    .btn-watch:hover {
+      background: var(--ktd)
+    }
+
+    .course-list {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem
+    }
+
+    .course-item {
+      padding: 1rem 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: none;
+      transition: border-color .2s;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    .course-item:hover {
+      border-color: var(--border-h)
+    }
+
+    .course-item.done {
+      border-left: 2px solid var(--kt)
+    }
+
+    .course-num {
+      font-family: var(--mono);
+      font-size: .6rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      flex-shrink: 0
+    }
+
+    .course-t {
+      font-size: .8rem;
+      color: var(--text);
+      flex: 1
+    }
+
+    .course-pt {
+      font-family: var(--serif);
+      font-size: .9rem;
+      color: var(--ktl)
+    }
+
+    .course-check {
+      color: var(--kt);
+      font-size: .8rem
+    }
+
+    /* Konfeti */
+    .konfeti-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      pointer-events: none;
+      display: none;
+    }
+
+    .konfeti-overlay.show {
+      display: block
+    }
+
+    .konfeti-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(.8);
+      background: var(--surface);
+      border: 1px solid var(--kt);
+      border-radius: 8px;
+      padding: 2.5rem 3rem;
+      text-align: center;
+      z-index: 9001;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(22, 160, 134, .2);
+      opacity: 0;
+      transition: all .35s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .konfeti-overlay.show .konfeti-popup {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1)
+    }
+
+    .konfeti-ic {
+      font-size: 3rem;
+      margin-bottom: .8rem;
+      display: block;
+      animation: bounce .6s .2s ease both
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    .konfeti-h {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .konfeti-pt {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--ktl);
+      line-height: 1
+    }
+
+    .konfeti-sub {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .5rem;
+      margin-bottom: 1.5rem
+    }
+
+    .konfeti-close {
+      padding: .6rem 2rem;
+      background: var(--kt);
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: none;
+      font-family: var(--sans);
+    }
+
+    /* Confetti particles */
+    .conf-particle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 8999;
+      animation: confFall 2.5s ease-in both;
+    }
+
+    @keyframes confFall {
+      0% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(0deg)
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg)
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: KAMPÜS LİGİ
+═══════════════════════════════════════════ */
+    .liga-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5rem;
+      align-items: start
+    }
+
+    .leaderboard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .lb-head {
+      display: grid;
+      grid-template-columns: 40px 1fr 80px 80px;
+      padding: .7rem 1.2rem;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: .56rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      gap: .5rem;
+    }
+
+    .lb-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 80px 80px;
+      padding: .9rem 1.2rem;
+      gap: .5rem;
+      border-bottom: 1px solid rgba(22, 160, 134, .05);
+      align-items: center;
+      transition: background .2s;
+      cursor: none;
+    }
+
+    .lb-row:hover {
+      background: rgba(22, 160, 134, .03)
+    }
+
+    .lb-row:last-child {
+      border-bottom: none
+    }
+
+    .lb-row.me {
+      background: rgba(22, 160, 134, .06);
+      border-left: 2px solid var(--kt)
+    }
+
+    .lb-rank {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .lb-rank.gold-r {
+      color: var(--gold)
+    }
+
+    .lb-rank.silver-r {
+      color: #A0ADB4
+    }
+
+    .lb-rank.bronze-r {
+      color: #C4784C
+    }
+
+    .lb-user {
+      display: flex;
+      align-items: center;
+      gap: .7rem
+    }
+
+    .lb-av {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: .55rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .lb-uname {
+      font-size: .82rem;
+      color: var(--text)
+    }
+
+    .lb-usub {
+      font-family: var(--mono);
+      font-size: .56rem;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    .lb-pts {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ktl);
+      text-align: right
+    }
+
+    .lb-league {
+      font-family: var(--mono);
+      font-size: .54rem;
+      letter-spacing: .08em;
+      padding: .2rem .5rem;
+      border-radius: 2px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .ll-gold {
+      background: rgba(197, 160, 89, .12);
+      color: var(--gold)
+    }
+
+    .ll-silver {
+      background: rgba(160, 173, 180, .1);
+      color: #A0ADB4
+    }
+
+    .ll-bronze {
+      background: rgba(196, 120, 76, .1);
+      color: #C4784C
+    }
+
+    .prizes-box {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem
+    }
+
+    .prize-card {
+      padding: 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: none;
+      transition: border-color .2s;
+    }
+
+    .prize-card:hover {
+      border-color: var(--border-h)
+    }
+
+    .prize-rank-badge {
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .1em;
+      padding: .2rem .6rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: .7rem;
+    }
+
+    .prize-ic {
+      font-size: 1.8rem;
+      margin-bottom: .5rem;
+      display: block
+    }
+
+    .prize-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: .2rem
+    }
+
+    .prize-val {
+      font-size: .75rem;
+      color: var(--muted)
+    }
+
+    .prize-pts {
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: var(--kt);
+      margin-top: .5rem;
+      letter-spacing: .05em;
+    }
+
+    .liga-my-stats {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      background: var(--surface);
+      border: 1px solid rgba(22, 160, 134, .2);
+      border-radius: 6px;
+    }
+
+    .my-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .6rem
+    }
+
+    .my-stats-lbl {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    .my-stats-val {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text)
+    }
+
+    .my-stats-val.g {
+      color: var(--ktl)
+    }
+
+    .progress-mini {
+      height: 4px;
+      background: rgba(22, 160, 134, .1);
+      border-radius: 2px;
+      margin-top: .3rem
+    }
+
+    .progress-mini-fill {
+      height: 100%;
+      background: var(--kt);
+      border-radius: 2px;
+      transition: width 1s ease
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: ULAŞIM & CASHBACK
+═══════════════════════════════════════════ */
+    .ulasim-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start
+    }
+
+    .card-3d-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .kt-card-vis {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 85.6/53.98;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0D2419 0%, #16A086 50%, #0A3020 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .5), 0 0 0 1px rgba(22, 160, 134, .3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kt-card-vis::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22, 160, 134, .15) 0%, transparent 60%);
+    }
+
+    .kc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .kc-logo {
+      height: 18px;
+      filter: brightness(0) invert(1);
+      opacity: .9
+    }
+
+    .kc-contactless {
+      color: rgba(255, 255, 255, .7);
+      font-size: 1.2rem
+    }
+
+    .kc-chip {
+      width: 38px;
+      height: 27px;
+      background: linear-gradient(135deg, var(--gold), #9C7A3A);
+      border-radius: 4px
+    }
+
+    .kc-num {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .7);
+      letter-spacing: .2em;
+      margin-top: .3rem
+    }
+
+    .kc-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end
+    }
+
+    .kc-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .85)
+    }
+
+    .kc-type {
+      font-family: var(--mono);
+      font-size: .55rem;
+      color: rgba(22, 160, 134, .9);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(22, 160, 134, .4);
+      padding: .2rem .5rem;
+      border-radius: 2px
+    }
+
+    .balance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+      margin-top: 1.2rem
+    }
+
+    .bal-card {
+      padding: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-align: left;
+    }
+
+    .bal-label {
+      font-family: var(--mono);
+      font-size: .56rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .4rem
+    }
+
+    .bal-val {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--text)
+    }
+
+    .bal-val.g {
+      color: var(--ktl)
+    }
+
+    .bal-sub {
+      font-size: .68rem;
+      color: var(--muted);
+      margin-top: .2rem
+    }
+
+    .transactions-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .tx-head {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--kt);
+    }
+
+    .tx-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .85rem 1.2rem;
+      border-bottom: 1px solid rgba(22, 160, 134, .05);
+      cursor: none;
+      transition: background .2s;
+    }
+
+    .tx-item:hover {
+      background: rgba(22, 160, 134, .03)
+    }
+
+    .tx-item:last-child {
+      border-bottom: none
+    }
+
+    .tx-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+
+    .tx-ic.green {
+      background: rgba(22, 160, 134, .1)
+    }
+
+    .tx-ic.gold {
+      background: rgba(197, 160, 89, .1)
+    }
+
+    .tx-info {
+      flex: 1
+    }
+
+    .tx-name {
+      font-size: .82rem;
+      color: var(--text);
+      margin-bottom: .1rem
+    }
+
+    .tx-date {
+      font-family: var(--mono);
+      font-size: .56rem;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    .tx-amt {
+      font-family: var(--serif);
+      font-size: 1rem;
+      flex-shrink: 0
+    }
+
+    .tx-amt.positive {
+      color: var(--ktl)
+    }
+
+    .tx-amt.negative {
+      color: var(--text2)
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: KARİYER & SPONSORLUK
+═══════════════════════════════════════════ */
+    .kariyer-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start
+    }
+
+    .staj-list {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      margin-top: .5rem
+    }
+
+    .staj-card {
+      padding: 1.2rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: none;
+      transition: border-color .25s, transform .2s;
+    }
+
+    .staj-card:hover {
+      border-color: var(--border-h);
+      transform: translateX(3px)
+    }
+
+    .staj-dept {
+      font-family: var(--mono);
+      font-size: .58rem;
+      color: var(--kt);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .4rem
+    }
+
+    .staj-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: .3rem
+    }
+
+    .staj-meta {
+      font-size: .74rem;
+      color: var(--muted)
+    }
+
+    .staj-tags {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      margin-top: .6rem
+    }
+
+    .staj-tag {
+      font-family: var(--mono);
+      font-size: .5rem;
+      letter-spacing: .08em;
+      background: rgba(22, 160, 134, .08);
+      color: var(--kt);
+      border: 1px solid rgba(22, 160, 134, .15);
+      padding: .2rem .5rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .btn-apply {
+      margin-top: .8rem;
+      padding: .55rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--kt);
+      border-radius: 3px;
+      color: var(--kt);
+      font-size: .78rem;
+      font-weight: 500;
+      cursor: none;
+      transition: background .2s, color .2s;
+      font-family: var(--sans);
+    }
+
+    .btn-apply:hover {
+      background: var(--kt);
+      color: #fff
+    }
+
+    .sponsor-form-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .sf-h {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .sf-sub {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5
+    }
+
+    .form-field {
+      margin-bottom: 1rem
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: .4rem
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: .65rem .9rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: .85rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--kt)
+    }
+
+    .form-select {
+      cursor: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235A7A68'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .9rem center
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.5
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: .8rem;
+      background: var(--kt);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      font-size: .85rem;
+      cursor: none;
+      transition: background .2s;
+      font-family: var(--sans);
+      letter-spacing: .03em;
+    }
+
+    .btn-submit:hover {
+      background: var(--ktd)
+    }
+
+    /* Submit success */
+    .submit-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .submit-success.show {
+      display: block;
+      animation: panelIn .4s ease
+    }
+
+    .ss-ic {
+      font-size: 3rem;
+      margin-bottom: .8rem;
+      display: block
+    }
+
+    .ss-h {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: .4rem
+    }
+
+    .ss-sub {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .ss-ref {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .08em;
+      color: var(--kt);
+      background: rgba(22, 160, 134, .06);
+      border: 1px solid rgba(22, 160, 134, .15);
+      padding: .5rem .9rem;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* ═══════════════════════════════════════════
+   PANEL: RAPORLAR
+═══════════════════════════════════════════ */
+    .rapor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem
+    }
+
+    .rapor-card {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .rapor-n {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--ktl);
+      margin-bottom: .3rem
+    }
+
+    .rapor-n.gold {
+      color: var(--gold)
+    }
+
+    .rapor-lbl {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: .4rem
+    }
+
+    .rapor-src {
+      font-family: var(--mono);
+      font-size: .53rem;
+      color: rgba(22, 160, 134, .35);
+      letter-spacing: .05em
+    }
+
+    .sources-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .src-title {
+      font-family: var(--mono);
+      font-size: .6rem;
+      color: var(--kt);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem
+    }
+
+    .src-item {
+      display: flex;
+      gap: .8rem;
+      padding: .55rem 0;
+      border-bottom: 1px solid rgba(22, 160, 134, .05);
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .src-item:last-child {
+      border-bottom: none
+    }
+
+    .src-item::before {
+      content: '—';
+      color: rgba(22, 160, 134, .3);
+      flex-shrink: 0
+    }
+
+    /* ─── util ─── */
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--kt);
+      opacity: .3;
+      margin-bottom: 1.2rem
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="cur"></div>
+  <div id="curl"></div>
+
+  <!-- ══════════════════════════════════════
+     KONFETI OVERLAY
+══════════════════════════════════════ -->
+  <div class="konfeti-overlay" id="konfeti-overlay">
+    <div class="konfeti-popup">
+      <span class="konfeti-ic">🎉</span>
+      <div class="konfeti-h">Tebrikler!</div>
+      <div class="konfeti-pt" id="konfeti-pts">+50</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--kt);letter-spacing:.12em;margin-top:.3rem">KAMPÜS
+        PUANI</div>
+      <div class="konfeti-sub">Katılım Bankacılığı 101 modülünü tamamladınız.<br>Toplam puanınız güncellendi.</div>
+      <button class="konfeti-close" onclick="closeKonfeti()">Devam Et →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════ -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="https://www.kuveytturk.com.tr/_assets/svg/logo.svg" alt="Kuveyt Türk">
+        <div class="login-logo-sep"></div>
+        <div class="login-logo-name">Genç <em>Katılım</em></div>
+      </div>
+      <div class="login-h">Hoş geldiniz</div>
+      <div class="login-sub">Kuveyt Türk Kampüs portalına giriş yapın.<br>Tüm ekosisteminiz tek ekranda.</div>
+      <div class="field">
+        <label>Öğrenci No / KT ID</label>
+        <input type="text" placeholder="örn. 20211234" id="login-id" value="20213456">
+      </div>
+      <div class="field">
+        <label>Şifre</label>
+        <input type="password" placeholder="••••••••" id="login-pw" value="••••••••">
+      </div>
+      <button class="btn-login" onclick="doLogin()">Giriş Yap →</button>
+      <div class="login-note">
+        DEMO: Herhangi bir bilgi ile giriş yapabilirsiniz.<br>
+        Bu sistem Kuveyt Türk Kaşif İnovasyon Kampı 2026 prototipidir.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════ -->
+  <div id="dashboard">
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+      <div class="sb-brand">
+        <img src="https://www.kuveytturk.com.tr/_assets/svg/logo.svg" alt="KT">
+        <div class="sb-brand-name">Genç <em>Katılım</em></div>
+      </div>
+      <div class="sb-section-label">Ana Menü</div>
+      <a class="nav-item active" data-panel="home" onclick="switchPanel('home',this)">
+        <span class="nav-ic">⊞</span> Ana Panel
+      </a>
+      <a class="nav-item" data-panel="akademi" onclick="switchPanel('akademi',this)">
+        <span class="nav-ic">🎓</span> Finans Akademi
+        <span class="nav-badge new">+50 pt</span>
+      </a>
+      <a class="nav-item" data-panel="liga" onclick="switchPanel('liga',this)">
+        <span class="nav-ic">🏆</span> Kampüs Ligi
+      </a>
+      <a class="nav-item" data-panel="ulasim" onclick="switchPanel('ulasim',this)">
+        <span class="nav-ic">🚌</span> Ulaşım & Kart
+      </a>
+      <a class="nav-item" data-panel="kariyer" onclick="switchPanel('kariyer',this)">
+        <span class="nav-ic">🚀</span> Kariyer & Staj
+        <span class="nav-badge">3 açık</span>
+      </a>
+      <a class="nav-item" data-panel="sponsorluk" onclick="switchPanel('sponsorluk',this)">
+        <span class="nav-ic">🤝</span> Sponsorluk
+      </a>
+      <div class="sb-section-label" style="margin-top:.8rem">Kuveyt Türk</div>
+      <a class="nav-item" data-panel="raporlar" onclick="switchPanel('raporlar',this)">
+        <span class="nav-ic">📊</span> Pazar Verileri
+      </a>
+      <div class="sb-footer">
+        <div class="sb-ver">Genç Katılım v3.0 · KT Kaşif 2026<br>ÖNCÜ EKİBİ</div>
+      </div>
+    </nav>
+
+    <!-- TOPBAR -->
+    <header id="topbar">
+      <div class="tb-page-title" id="tb-page-title">Ana Panel</div>
+      <div class="tb-right">
+        <div class="kt-score-pill">
+          <div>
+            <div class="score-label">Kampüs Puanı</div>
+            <div class="score-val" id="score-display">1 250 PT</div>
+          </div>
+          <div class="score-sep"></div>
+          <div class="league-badge" id="league-display">🥇 Altın Lig</div>
+        </div>
+        <div class="user-pill">
+          <div class="user-av">AY</div>
+          <div class="user-name">Ahmet Y.</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main id="content">
+
+      <!-- ── HOME ── -->
+      <div class="panel active" id="panel-home">
+        <div class="rule"></div>
+        <div class="panel-h">Merhaba, Ahmet 👋</div>
+        <div class="panel-sub">Kampüs ekosistemine hoş geldiniz. Bugün 3 yeni içerik ve 2 staj fırsatı sizi bekliyor.
+        </div>
+        <div class="home-grid">
+          <div class="home-card" onclick="switchPanel('liga',document.querySelector('[data-panel=liga]'))">
+            <div class="home-card-ic">🏆</div>
+            <div class="home-card-n">4.</div>
+            <div class="home-card-lbl">Kampüs Ligi sıralamanız. Altın lig için 340 puan daha kazanın.</div>
+          </div>
+          <div class="home-card">
+            <div class="home-card-ic">💳</div>
+            <div class="home-card-n">₺127,50</div>
+            <div class="home-card-lbl">Bu ay kazandığınız cashback. Kampüs kafelerinde geçerli.</div>
+          </div>
+          <div class="home-card">
+            <div class="home-card-ic">🎓</div>
+            <div class="home-card-n gold">3</div>
+            <div class="home-card-lbl">Tamamlanmamış akademi modülü. İzle ve puan kazan.</div>
+          </div>
+        </div>
+        <div class="home-row">
+          <div class="quick-actions">
+            <div class="qa-title">Hızlı Eylemler</div>
+            <div class="qa-list">
+              <div class="qa-item" onclick="switchPanel('akademi',document.querySelector('[data-panel=akademi]'))">
+                <span class="qa-item-ic">▶</span> Bugünkü Finans Akademi Dersini İzle <span class="qa-item-arr">→</span>
+              </div>
+              <div class="qa-item"
+                onclick="switchPanel('sponsorluk',document.querySelector('[data-panel=sponsorluk]'))">
+                <span class="qa-item-ic">🤝</span> Kulübüm İçin Sponsorluk Başvurusu Yap <span
+                  class="qa-item-arr">→</span>
+              </div>
+              <div class="qa-item" onclick="switchPanel('kariyer',document.querySelector('[data-panel=kariyer]'))">
+                <span class="qa-item-ic">🚀</span> Yeni Staj Fırsatlarını Gör <span class="qa-item-arr">→</span>
+              </div>
+              <div class="qa-item" onclick="switchPanel('ulasim',document.querySelector('[data-panel=ulasim]'))">
+                <span class="qa-item-ic">🚌</span> Ulaşım Bakiyemi Kontrol Et <span class="qa-item-arr">→</span>
+              </div>
+            </div>
+          </div>
+          <div class="recent-activity">
+            <div class="ra-title">Son Hareketler</div>
+            <div class="act-item">
+              <div class="act-dot"></div>
+              <div>
+                <div class="act-t">Kampüs Kafe — Cashback +₺4,80</div>
+                <div class="act-d">Bugün · 12:34</div>
+              </div>
+            </div>
+            <div class="act-item">
+              <div class="act-dot gold"></div>
+              <div>
+                <div class="act-t">Finans Akademi — +100 Puan</div>
+                <div class="act-d">Dün · 19:12</div>
+              </div>
+            </div>
+            <div class="act-item">
+              <div class="act-dot"></div>
+              <div>
+                <div class="act-t">İETT — Kart Kullanımı ₺17,50</div>
+                <div class="act-d">Dün · 08:45</div>
+              </div>
+            </div>
+            <div class="act-item">
+              <div class="act-dot dim"></div>
+              <div>
+                <div class="act-t">Sponsorluk Başvurusu — Onaylandı</div>
+                <div class="act-d">3 gün önce</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FİNANS AKADEMİ ── -->
+      <div class="panel" id="panel-akademi">
+        <div class="rule"></div>
+        <div class="panel-h">Finans <em style="font-style:italic;color:var(--ktl)">Akademi</em></div>
+        <div class="panel-sub">Sertifikalı modülleri tamamla, puan kazan. Her video = gerçek hayata bir adım.</div>
+        <div class="akademi-layout">
+          <div class="video-box">
+            <div class="video-player" id="video-player" onclick="startVideo()">
+              <div class="video-thumb-overlay"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <button class="video-play-btn" id="play-btn">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+                <div style="font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,.7);margin-top:.8rem;">
+                  Oynatmak için tıklayın</div>
+              </div>
+              <div class="video-progress-bar">
+                <div class="video-progress-fill" id="vpf"></div>
+              </div>
+            </div>
+            <div class="video-meta">
+              <div class="video-episode">Modül 01 · Bölüm 1</div>
+              <div class="video-title">Katılım Bankacılığı 101: Temel Kavramlar</div>
+              <div class="video-desc">Faizsiz bankacılığın temelleri, kâr-zarar ortaklığı ve helal finans prensiplerini
+                öğreniyor, finansal okuryazarlığınızı güçlendiriyorsunuz.</div>
+              <div class="video-reward">🎯 Bu modülü tamamlayın → +50 Kampüs Puanı</div>
+              <button class="btn-watch" onclick="startVideo()">
+                ▶ &nbsp;Derse Başla
+              </button>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--kt);margin-bottom:1rem;">
+              Müfredat</div>
+            <div class="course-list">
+              <div class="course-item done">
+                <div class="course-num">01</div>
+                <div class="course-t">Katılım Bankacılığı 101</div>
+                <div class="course-pt">+100</div>
+                <div class="course-check">✓</div>
+              </div>
+              <div class="course-item" style="border-left:2px solid var(--kt)">
+                <div class="course-num">02</div>
+                <div class="course-t">Bütçe Yönetimi & Tasarruf</div>
+                <div class="course-pt" style="color:var(--muted)">+50</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">03</div>
+                <div class="course-t">Yatırım Araçlarına Giriş</div>
+                <div class="course-pt" style="color:var(--muted)">+50</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">04</div>
+                <div class="course-t">Kredi Kartı & Borç Yönetimi</div>
+                <div class="course-pt" style="color:var(--muted)">+50</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">05</div>
+                <div class="course-t">Emeklilik Planlaması</div>
+                <div class="course-pt" style="color:var(--muted)">+75</div>
+              </div>
+              <div class="course-item" style="opacity:.4">
+                <div class="course-num">06</div>
+                <div class="course-t">Girişimcilik & Finansman</div>
+                <div class="course-pt" style="color:var(--muted)">+100</div>
+              </div>
+            </div>
+            <div
+              style="margin-top:1.2rem;padding:.9rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.12);border-radius:4px;">
+              <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;">Modül İlerlemesi</div>
+              <div class="progress-mini">
+                <div class="progress-mini-fill" style="width:33%"></div>
+              </div>
+              <div
+                style="font-family:var(--mono);font-size:.58rem;color:var(--kt);margin-top:.5rem;letter-spacing:.06em;">
+                2 / 6 TAMAMLANDI · 375 PUAN KAZANILDI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KAMPÜS LİGİ ── -->
+      <div class="panel" id="panel-liga">
+        <div class="rule"></div>
+        <div class="panel-h">Kampüs <em style="font-style:italic;color:var(--ktl)">Ligi</em></div>
+        <div class="panel-sub">Puan kazan, sıralamada yüksel, harika ödüller kazan. Sezon biter bitmez ödüller
+          dağıtılır.</div>
+        <div class="liga-layout">
+          <div>
+            <div class="leaderboard">
+              <div class="lb-head">
+                <div>#</div>
+                <div>Öğrenci</div>
+                <div style="text-align:right">Puan</div>
+                <div style="text-align:center">Lig</div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank gold-r">🥇</div>
+                <div class="lb-user">
+                  <div class="lb-av" style="background:linear-gradient(135deg,#a07020,#C5A059)">EK</div>
+                  <div>
+                    <div class="lb-uname">Elif K.</div>
+                    <div class="lb-usub">İktisat · 4. Sınıf</div>
+                  </div>
+                </div>
+                <div class="lb-pts">2 840</div>
+                <div>
+                  <div class="lb-league ll-gold">Altın</div>
+                </div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank silver-r">🥈</div>
+                <div class="lb-user">
+                  <div class="lb-av" style="background:linear-gradient(135deg,#607880,#A0ADB4)">MT</div>
+                  <div>
+                    <div class="lb-uname">Mert T.</div>
+                    <div class="lb-usub">MIS · 3. Sınıf</div>
+                  </div>
+                </div>
+                <div class="lb-pts">2 610</div>
+                <div>
+                  <div class="lb-league ll-silver">Altın</div>
+                </div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank bronze-r">🥉</div>
+                <div class="lb-user">
+                  <div class="lb-av" style="background:linear-gradient(135deg,#7a4020,#C4784C)">ZA</div>
+                  <div>
+                    <div class="lb-uname">Zeynep A.</div>
+                    <div class="lb-usub">İşletme · 2. Sınıf</div>
+                  </div>
+                </div>
+                <div class="lb-pts">2 190</div>
+                <div>
+                  <div class="lb-league ll-bronze">Gümüş</div>
+                </div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank" style="color:var(--muted)">4</div>
+                <div class="lb-user">
+                  <div class="lb-av" style="background:linear-gradient(135deg,var(--ktd),var(--kt))">BY</div>
+                  <div>
+                    <div class="lb-uname">Baran Y.</div>
+                    <div class="lb-usub">Finans · 3. Sınıf</div>
+                  </div>
+                </div>
+                <div class="lb-pts" style="color:var(--text2)">1 980</div>
+                <div>
+                  <div class="lb-league ll-bronze">Gümüş</div>
+                </div>
+              </div>
+              <div class="lb-row me">
+                <div class="lb-rank" style="color:var(--kt)">5</div>
+                <div class="lb-user">
+                  <div class="lb-av" style="background:linear-gradient(135deg,var(--ktd),var(--kt))">AY</div>
+                  <div>
+                    <div class="lb-uname">Ahmet Y. <span style="color:var(--kt);font-size:.7rem">(Sen)</span></div>
+                    <div class="lb-usub">MIS · 3. Sınıf</div>
+                  </div>
+                </div>
+                <div class="lb-pts" style="color:var(--ktl)">1 250</div>
+                <div>
+                  <div class="lb-league ll-silver">Gümüş</div>
+                </div>
+              </div>
+            </div>
+            <div class="liga-my-stats">
+              <div class="my-stats-row">
+                <div class="my-stats-lbl">Mevcut Puanınız</div>
+                <div class="my-stats-val g">1 250 PT</div>
+              </div>
+              <div class="my-stats-row">
+                <div class="my-stats-lbl">Altın Lig'e Kalan</div>
+                <div class="my-stats-val">340 PT</div>
+              </div>
+              <div class="progress-mini">
+                <div class="progress-mini-fill" id="liga-prog"></div>
+              </div>
+              <div
+                style="font-family:var(--mono);font-size:.56rem;color:var(--muted);margin-top:.4rem;letter-spacing:.05em;">
+                SEZON BİTİŞ: 31 MAYIS 2026</div>
+            </div>
+          </div>
+          <div class="prizes-box">
+            <div style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--kt);margin-bottom:1rem;">
+              Sezon Ödülleri</div>
+            <div class="prize-card">
+              <div class="prize-rank-badge ll-gold">🥇 1. Sıra</div>
+              <span class="prize-ic">💻</span>
+              <div class="prize-name">MacBook Air M3</div>
+              <div class="prize-val">14" · 16GB RAM · 512GB SSD</div>
+              <div class="prize-pts">MIN. 2500 PT GEREKLİ</div>
+            </div>
+            <div class="prize-card">
+              <div class="prize-rank-badge ll-silver">🥈 2. Sıra</div>
+              <span class="prize-ic">🎧</span>
+              <div class="prize-name">Sony WH-1000XM5</div>
+              <div class="prize-val">Gürültü Engelleyici Kulaklık</div>
+              <div class="prize-pts">MIN. 2000 PT GEREKLİ</div>
+            </div>
+            <div class="prize-card">
+              <div class="prize-rank-badge ll-bronze">🥉 3. Sıra</div>
+              <span class="prize-ic">⌨️</span>
+              <div class="prize-name">Apple iPad + Kalem</div>
+              <div class="prize-val">10. Nesil · 64GB · Wi-Fi</div>
+              <div class="prize-pts">MIN. 1500 PT GEREKLİ</div>
+            </div>
+            <div
+              style="margin-top:.8rem;padding:.9rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.1);border-radius:4px;font-family:var(--mono);font-size:.56rem;color:rgba(22,160,134,.5);line-height:1.7;letter-spacing:.04em;">
+              Puan kaynakları: Akademi modülleri · Ulaşım harcamaları · Arkadaşını Getir · Kulüp Etkinliği
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ULAŞIM & KART ── -->
+      <div class="panel" id="panel-ulasim">
+        <div class="rule"></div>
+        <div class="panel-h">Ulaşım & <em style="font-style:italic;color:var(--ktl)">Kampüs Kart</em></div>
+        <div class="panel-sub">Tek kart, tüm şehir. Ulaşım bakiyeniz ve cashback kazanımlarınız tek ekranda.</div>
+        <div class="ulasim-layout">
+          <div class="card-3d-wrapper">
+            <div class="kt-card-vis">
+              <div class="kc-top">
+                <img src="https://www.kuveytturk.com.tr/_assets/svg/logo.svg" class="kc-logo" alt="KT">
+                <div class="kc-contactless">◎</div>
+              </div>
+              <div class="kc-chip"></div>
+              <div class="kc-num">•••• &nbsp;•••• &nbsp;•••• &nbsp;7734</div>
+              <div class="kc-bottom">
+                <div>
+                  <div class="kc-name">AHMET YILMAZ</div>
+                  <div
+                    style="font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.4);letter-spacing:.08em;margin-top:.2rem">
+                    12/28</div>
+                </div>
+                <div class="kc-type">Kampüs</div>
+              </div>
+            </div>
+            <div class="balance-grid">
+              <div class="bal-card">
+                <div class="bal-label">Banka Bakiyesi</div>
+                <div class="bal-val g">₺1.847</div>
+                <div class="bal-sub">Son güncelleme: az önce</div>
+              </div>
+              <div class="bal-card">
+                <div class="bal-label">Ulaşım Bakiyesi</div>
+                <div class="bal-val">₺84,50</div>
+                <div class="bal-sub">İETT · Marmaray · Metro</div>
+              </div>
+              <div class="bal-card">
+                <div class="bal-label">Bu Ay Cashback</div>
+                <div class="bal-val g">₺127,50</div>
+                <div class="bal-sub">Kampüs kafelerinden</div>
+              </div>
+              <div class="bal-card">
+                <div class="bal-label">Kampüs Puanı</div>
+                <div class="bal-val" style="color:var(--gold)">1 250 PT</div>
+                <div class="bal-sub">Gümüş Lig</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="transactions-box">
+              <div class="tx-head">Son İşlemler</div>
+              <div class="tx-item">
+                <div class="tx-ic green">☕</div>
+                <div class="tx-info">
+                  <div class="tx-name">Kampüs Kafe A Blok</div>
+                  <div class="tx-date">Bugün · 12:34 · Cashback +₺4,80</div>
+                </div>
+                <div class="tx-amt negative">-₺48,00</div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-ic green">🚌</div>
+                <div class="tx-info">
+                  <div class="tx-name">İETT — Hat 34K</div>
+                  <div class="tx-date">Bugün · 08:22</div>
+                </div>
+                <div class="tx-amt negative">-₺17,50</div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-ic gold">💰</div>
+                <div class="tx-info">
+                  <div class="tx-name">Cashback — Ekim Toplam</div>
+                  <div class="tx-date">Dün · 00:00 · Otomatik</div>
+                </div>
+                <div class="tx-amt positive">+₺127,50</div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-ic green">🚇</div>
+                <div class="tx-info">
+                  <div class="tx-name">Marmaray — Aylık Bilet</div>
+                  <div class="tx-date">01 Eki · Otomatik Yenileme</div>
+                </div>
+                <div class="tx-amt negative">-₺350,00</div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-ic gold">🏆</div>
+                <div class="tx-info">
+                  <div class="tx-name">Kampüs Ligi — Ödül Puanı</div>
+                  <div class="tx-date">28 Eyl · Finans Akademi</div>
+                </div>
+                <div class="tx-amt positive">+100 PT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KARİYER ── -->
+      <div class="panel" id="panel-kariyer">
+        <div class="rule"></div>
+        <div class="panel-h">Kariyer & <em style="font-style:italic;color:var(--ktl)">Staj</em></div>
+        <div class="panel-sub">Kuveyt Türk bünyesinde ve iştiraklerinde staj fırsatları. Başvur, kariyer yolculuğuna
+          başla.</div>
+        <div class="kariyer-layout">
+          <div>
+            <div
+              style="font-family:var(--mono);font-size:.58rem;color:var(--kt);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem">
+              3 Açık Pozisyon</div>
+            <div class="staj-list">
+              <div class="staj-card">
+                <div class="staj-dept">Teknoloji & İnovasyon</div>
+                <div class="staj-title">Yazılım Geliştirme Stajyeri</div>
+                <div class="staj-meta">İstanbul, Genel Müdürlük · Tam Zamanlı · 3 Ay</div>
+                <div class="staj-tags">
+                  <div class="staj-tag">React</div>
+                  <div class="staj-tag">Python</div>
+                  <div class="staj-tag">Fintech</div>
+                </div>
+                <button class="btn-apply" onclick="applyJob(this,'Yazılım Geliştirme Stajyeri')">Başvur →</button>
+              </div>
+              <div class="staj-card">
+                <div class="staj-dept">Dijital Bankacılık</div>
+                <div class="staj-title">Ürün & UX Araştırma Stajyeri</div>
+                <div class="staj-meta">İstanbul, Genel Müdürlük · Yarı Zamanlı · 6 Ay</div>
+                <div class="staj-tags">
+                  <div class="staj-tag">UX Research</div>
+                  <div class="staj-tag">Figma</div>
+                  <div class="staj-tag">Analitik</div>
+                </div>
+                <button class="btn-apply" onclick="applyJob(this,'Ürün & UX Araştırma Stajyeri')">Başvur →</button>
+              </div>
+              <div class="staj-card">
+                <div class="staj-dept">Kitle Segment</div>
+                <div class="staj-title">Genç Müşteri Segmenti Stajyeri</div>
+                <div class="staj-meta">İstanbul / Uzak · Esnek · 4 Ay</div>
+                <div class="staj-tags">
+                  <div class="staj-tag">Pazarlama</div>
+                  <div class="staj-tag">Veri Analizi</div>
+                  <div class="staj-tag">CRM</div>
+                </div>
+                <button class="btn-apply" onclick="applyJob(this,'Genç Müşteri Segmenti Stajyeri')">Başvur →</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              style="padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-bottom:1rem;">
+              <div
+                style="font-family:var(--serif);font-size:1.1rem;color:var(--kt);font-style:italic;margin-bottom:.8rem">
+                Kariyer Yolculuğunuz</div>
+              <div class="act-item">
+                <div class="act-dot"></div>
+                <div>
+                  <div class="act-t">Finans Akademi Sertifikası</div>
+                  <div class="act-d">2 / 6 MODÜL TAMAMLANDI</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot gold"></div>
+                <div>
+                  <div class="act-t">Kampüs Ligi — Gümüş Lig</div>
+                  <div class="act-d">1.250 / 1.590 PT</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot dim"></div>
+                <div>
+                  <div class="act-t">Staj Başvurusu — Bekleniyor</div>
+                  <div class="act-d">HENÜz BAŞVURULMADI</div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="padding:1.2rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.12);border-radius:4px;font-size:.78rem;color:var(--muted);line-height:1.6;">
+              <div style="font-family:var(--serif);font-size:.9rem;color:var(--text);margin-bottom:.4rem">💡 İpucu</div>
+              Akademi modüllerini tamamlayan öğrencilerin staj başvuruları <span style="color:var(--kt)">%40 daha
+                yüksek</span> değerlendirme puanı alıyor.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SPONSORLUK ── -->
+      <div class="panel" id="panel-sponsorluk">
+        <div class="rule"></div>
+        <div class="panel-h">Sponsorluk <em style="font-style:italic;color:var(--gold)">Portalı</em></div>
+        <div class="panel-sub">Kulübünüz için etkinlik veya sponsorluk talebini doğrudan dijital portal üzerinden
+          iletin.</div>
+        <div style="max-width:600px">
+          <div class="sponsor-form-box">
+            <div id="form-body">
+              <div class="sf-h">Talep Formu</div>
+              <div class="sf-sub">Doldurduğunuz form ilgili şube müdürüne ve KT Kurumsal İletişim ekibine iletilir.
+                Ortalama yanıt süresi: 3 iş günü.</div>
+              <div class="form-field">
+                <label class="form-label">Kulüp / Öğrenci Topluluğu Adı</label>
+                <input class="form-input" type="text" placeholder="örn. İTÜ Finans Kulübü"
+                  value="MIS Girişimcilik Kulübü">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Talep Türü</label>
+                <select class="form-select">
+                  <option>Etkinlik Sponsorluğu</option>
+                  <option>Teknik Gezi Talebi</option>
+                  <option>Konuşmacı / Mentorluk</option>
+                  <option>Materyal & Baskı Desteği</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Etkinlik Tarihi</label>
+                <input class="form-input" type="text" placeholder="örn. 15 Kasım 2026" value="28 Kasım 2026">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Tahmini Katılımcı Sayısı</label>
+                <input class="form-input" type="text" placeholder="örn. 150 kişi" value="200 kişi">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Talep Detayı</label>
+                <textarea class="form-textarea"
+                  placeholder="Etkinliğinizi ve ihtiyacınızı kısaca açıklayın...">Yıllık Girişimcilik Zirvesi için KT sponsorluğu ve bir yönetici konuşmacı talep ediyoruz.</textarea>
+              </div>
+              <button class="btn-submit" onclick="submitSponsor()">Başvuruyu Gönder →</button>
+            </div>
+            <div class="submit-success" id="submit-success">
+              <span class="ss-ic">✅</span>
+              <div class="ss-h">Talebiniz İletildi!</div>
+              <div class="ss-sub">Başvurunuz ilgili şube müdürüne ve KT Kurumsal İletişim ekibine iletildi.<br>3 iş günü
+                içinde geri dönüş sağlanacak.</div>
+              <div class="ss-ref">REF: KT-SPNSR-2026-0034</div>
+              <div
+                style="margin-top:1rem;font-family:var(--mono);font-size:.56rem;color:var(--muted);letter-spacing:.05em">
+                Takip için referans numarasını saklayın.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RAPORLAR ── -->
+      <div class="panel" id="panel-raporlar">
+        <div class="rule"></div>
+        <div class="panel-h">Pazar <em style="font-style:italic;color:var(--ktl)">Verileri</em></div>
+        <div class="panel-sub">Projenin dayandığı piyasa araştırması ve kamu verileri. Tüm kaynaklar doğrulanmıştır.
+        </div>
+        <div class="rapor-grid">
+          <div class="rapor-card">
+            <div class="rapor-n">7,08M</div>
+            <div class="rapor-lbl">Türkiye'de yükseköğrenimdeki toplam öğrenci — projenin doğrudan hedef kitlesi</div>
+            <div class="rapor-src">YÖK Yükseköğretim Bilgi Yönetim Sistemi, 2023-2024</div>
+          </div>
+          <div class="rapor-card">
+            <div class="rapor-n">%95</div>
+            <div class="rapor-lbl">Gençlerin banka hesabı sahibi olma oranı — ancak aktif kullananlar <strong
+                style="color:var(--text)">%50'nin altında</strong></div>
+            <div class="rapor-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
+          </div>
+          <div class="rapor-card">
+            <div class="rapor-n">%84</div>
+            <div class="rapor-lbl">Gençlerin tüm bankacılık işlemlerini <strong style="color:var(--text)">yalnızca
+                mobil</strong> üzerinden yapma oranı</div>
+            <div class="rapor-src">Garanti BBVA / TBV Be Node Araştırması, 2025</div>
+          </div>
+          <div class="rapor-card">
+            <div class="rapor-n gold">900K+</div>
+            <div class="rapor-lbl">Her yıl iş hayatına katılan yeni mezun — müşteri yolculuğunun kritik başlangıç
+              noktası</div>
+            <div class="rapor-src">YÖK Yükseköğretim Mezuniyet İstatistikleri, 2022-2023</div>
+          </div>
+        </div>
+        <div class="sources-list">
+          <div class="src-title">Veri Kaynakları</div>
+          <div class="src-item">YÖK Yükseköğretim Bilgi Yönetim Sistemi — 2023-2024 öğrenci ve mezuniyet istatistikleri
+          </div>
+          <div class="src-item">Garanti BBVA / Türkiye Bilişim Vakfı Be Node — Gençlik Bankacılığı Araştırması, 2025
+          </div>
+          <div class="src-item">KPMG Türkiye — Bankacılık Sektörel Bakış 2024 (TBB kaynaklı dijital bankacılık verileri)
+          </div>
+          <div class="src-item">Kuveyt Türk — Kampüs Programı & Sağlam Kart Kampüs ürün sayfası, 2024</div>
+          <div class="src-item">Anadolu Ajansı — Kuveyt Türk Kampüs Programı Basın Açıklaması, Ekim 2024</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════
+       CURSOR
+    ═══════════════════════════════════════════ */
+    const cur = document.getElementById('cur'), curl = document.getElementById('curl');
+    let mx = 0, my = 0, lx = 0, ly = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+    (function al() { lx += (mx - lx) * .1; ly += (my - ly) * .1; curl.style.left = lx + 'px'; curl.style.top = ly + 'px'; requestAnimationFrame(al) })();
+
+    /* ═══════════════════════════════════════════
+       LOGIN
+    ═══════════════════════════════════════════ */
+    function doLogin() {
+      const ls = document.getElementById('login-screen');
+      const db = document.getElementById('dashboard');
+      ls.classList.add('out');
+      setTimeout(() => {
+        ls.style.display = 'none';
+        db.style.display = 'grid';
+        setTimeout(() => db.classList.add('visible'), 30);
+        // animate liga progress bar
+        setTimeout(() => {
+          document.getElementById('liga-prog').style.width = '44%';
+        }, 600);
+      }, 600);
+    }
+
+    /* ═══════════════════════════════════════════
+       PANEL SWITCH
+    ═══════════════════════════════════════════ */
+    const pageTitles = {
+      home: 'Ana Panel',
+      akademi: 'Finans Akademi',
+      liga: 'Kampüs Ligi',
+      ulasim: 'Ulaşım & Kampüs Kart',
+      kariyer: 'Kariyer & Staj',
+      sponsorluk: 'Sponsorluk Portalı',
+      raporlar: 'Pazar Verileri'
+    };
+
+    function switchPanel(id, navEl) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      if (navEl) navEl.classList.add('active');
+      document.getElementById('tb-page-title').textContent = pageTitles[id] || id;
+      // scroll to top
+      document.getElementById('content').scrollTop = 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       VIDEO SIMULATION
+    ═══════════════════════════════════════════ */
+    let videoPlaying = false;
+    let videoInterval = null;
+    let videoProgress = 0;
+    let videoDone = false;
+
+    function startVideo() {
+      if (videoDone) return;
+      if (videoPlaying) return;
+      videoPlaying = true;
+      const btn = document.getElementById('play-btn');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+      videoInterval = setInterval(() => {
+        videoProgress += 100 / 85; // ~85 steps to fill in ~7 sec at 80ms interval
+        if (videoProgress >= 100) {
+          videoProgress = 100;
+          clearInterval(videoInterval);
+          videoPlaying = false;
+          videoDone = true;
+          document.getElementById('vpf').style.width = '100%';
+          setTimeout(() => showKonfeti(50), 400);
+        }
+        document.getElementById('vpf').style.width = videoProgress + '%';
+      }, 80);
+    }
+
+    /* ═══════════════════════════════════════════
+       KONFETI
+    ═══════════════════════════════════════════ */
+    let currentScore = 1250;
+
+    function showKonfeti(pts) {
+      currentScore += pts;
+      document.getElementById('konfeti-pts').textContent = '+' + pts;
+      document.getElementById('score-display').textContent = currentScore.toLocaleString('tr') + ' PT';
+      document.getElementById('konfeti-overlay').classList.add('show');
+      spawnConfetti();
+    }
+
+    function spawnConfetti() {
+      const colors = ['#16A086', '#1AC0A0', '#C5A059', '#D4B470', '#fff', '#5EFFDB'];
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement('div');
+        el.className = 'conf-particle';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.top = Math.random() * -20 + 'px';
+        el.style.background = colors[Math.floor(Math.random() * colors.length)];
+        el.style.animationDelay = Math.random() * .8 + 's';
+        el.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
+        el.style.width = (6 + Math.random() * 8) + 'px';
+        el.style.height = (6 + Math.random() * 8) + 'px';
+        el.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 3000);
+      }
+    }
+
+    function closeKonfeti() {
+      document.getElementById('konfeti-overlay').classList.remove('show');
+    }
+
+    /* ═══════════════════════════════════════════
+       STAJ BAŞVURUSU
+    ═══════════════════════════════════════════ */
+    function applyJob(btn, title) {
+      btn.textContent = 'Başvuruluyor...';
+      btn.disabled = true;
+      btn.style.opacity = '.6';
+      setTimeout(() => {
+        btn.textContent = '✓ Başvuru Alındı';
+        btn.style.background = 'rgba(22,160,134,.15)';
+        btn.style.color = 'var(--kt)';
+        btn.style.border = '1px solid rgba(22,160,134,.3)';
+        btn.style.opacity = '1';
+        // show mini notification
+        showToast('Başvurunuz iletildi: ' + title);
+      }, 1200);
+    }
+
+    /* ═══════════════════════════════════════════
+       SPONSORLUK BAŞVURUSU
+    ═══════════════════════════════════════════ */
+    function submitSponsor() {
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('submit-success').classList.add('show');
+    }
+
+    /* ═══════════════════════════════════════════
+       TOAST NOTIFICATION
+    ═══════════════════════════════════════════ */
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid rgba(22,160,134,.3);border-radius:4px;padding:.8rem 1.2rem;font-size:.8rem;color:var(--text);z-index:9999;animation:panelIn .3s ease;box-shadow:0 20px 40px rgba(0,0,0,.4);display:flex;align-items:center;gap:.6rem;font-family:var(--sans);';
+      t.innerHTML = '<span style="color:var(--kt)">✓</span> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400) }, 3000);
+    }
+
+    /* ═══════════════════════════════════════════
+       KEYBOARD SHORTCUT (Enter → login)
+    ═══════════════════════════════════════════ */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+        doLogin();
+      }
+    });
+  </script>
+</body>
+
+</html>
