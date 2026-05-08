@@ -1974,6 +1974,20 @@
         <div class="rule"></div>
         <div class="panel-h">Finans <em style="font-style:italic;color:var(--ktl)">Akademi</em></div>
         <div class="panel-sub">Sertifikalı modülleri tamamla, puan kazan. Her video = gerçek hayata bir adım.</div>
+
+        <!-- İNGİLİZCE KURSU BANNER -->
+        <div style="margin-bottom:1.5rem;padding:1.2rem 1.5rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.2);border-left:3px solid var(--kt);border-radius:4px;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+          <div style="font-size:2rem;flex-shrink:0;">🗣️</div>
+          <div style="flex:1;min-width:220px;">
+            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;flex-wrap:wrap;">
+              <span style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text)">Ücretsiz İngilizce Kursu</span>
+              <span style="font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--kt);background:rgba(22,160,134,.1);border:1px solid rgba(22,160,134,.2);border-radius:2px;padding:.15rem .45rem;">🌱 Sosyal Sorumluluk</span>
+            </div>
+            <div style="font-size:.78rem;color:var(--muted);line-height:1.55;">Kuveyt Türk personeline sunulan İngilizce eğitim programı, <strong style="color:var(--text)">Kampüs tanımındaki tüm öğrencilere ücretsiz</strong> açılıyor. Mevcut altyapı, gençler için yeni bir değere dönüşüyor.</div>
+          </div>
+          <button class="btn-watch" style="width:auto;padding:.65rem 1.4rem;flex-shrink:0;" onclick="showToast('İngilizce Kursuna kaydınız tamamlandı! Başlangıç içerikleri e-posta adresinize gönderildi.')">Kursa Kaydol →</button>
+        </div>
+
         <div class="akademi-layout">
           <div class="video-box">
             <div class="video-player" id="video-player" onclick="startVideo()">
@@ -2201,6 +2215,10 @@
               </div>
               <div class="kc-chip"></div>
               <div class="kc-num">•••• &nbsp;•••• &nbsp;•••• &nbsp;7734</div>
+              <!-- Üniversite rozeti -->
+              <div style="position:absolute;top:.9rem;right:.9rem;display:flex;flex-direction:column;align-items:center;gap:.15rem;">
+                <div id="uni-badge" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:0;">İTÜ</div>
+              </div>
               <div class="kc-bottom">
                 <div>
                   <div class="kc-name">AHMET YILMAZ</div>
@@ -2211,6 +2229,18 @@
                 <div class="kc-type">Kampüs</div>
               </div>
             </div>
+            <!-- Üniversite seçici -->
+            <div style="margin-top:1rem;padding:.8rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:4px;">
+              <div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;">Kart Tasarımı — Üniversiteniz</div>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <button onclick="setUni('İTÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;" class="uni-btn active-uni">İTÜ</button>
+                <button onclick="setUni('BÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">BÜ</button>
+                <button onclick="setUni('ODTÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">ODTÜ</button>
+                <button onclick="setUni('KOÇ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">KOÇ</button>
+                <button onclick="setUni('SAÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">SAÜ</button>
+              </div>
+            </div>
+
             <div class="balance-grid">
               <div class="bal-card">
                 <div class="bal-label">Banka Bakiyesi</div>
@@ -2223,20 +2253,29 @@
                 <div class="bal-sub">İETT · Marmaray · Metro</div>
               </div>
               <div class="bal-card">
-                <div class="bal-label">Bu Ay Cashback</div>
+                <div class="bal-label">Kafe Cashback</div>
                 <div class="bal-val g">₺127,50</div>
                 <div class="bal-sub">Kampüs kafelerinden</div>
               </div>
-              <div class="bal-card">
-                <div class="bal-label">Kampüs Puanı</div>
-                <div class="bal-val" style="color:var(--gold)">1 250 PT</div>
-                <div class="bal-sub">Gümüş Lig</div>
+              <div class="bal-card" style="border-color:rgba(22,160,134,.25);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:.5rem;right:.5rem;font-family:var(--mono);font-size:.44rem;letter-spacing:.08em;color:var(--kt);background:rgba(22,160,134,.1);border:1px solid rgba(22,160,134,.2);border-radius:2px;padding:.1rem .35rem;">🌱 SOS. SOR.</div>
+                <div class="bal-label">Spor Cashback</div>
+                <div class="bal-val g">₺43,20</div>
+                <div class="bal-sub">Spor salonu üyeliği</div>
               </div>
             </div>
           </div>
           <div>
             <div class="transactions-box">
               <div class="tx-head">Son İşlemler</div>
+              <div class="tx-item">
+                <div class="tx-ic green">🏋️</div>
+                <div class="tx-info">
+                  <div class="tx-name">Spor Salonu — Aylık Üyelik</div>
+                  <div class="tx-date">Bugün · 09:00 · Cashback +₺43,20 🌱</div>
+                </div>
+                <div class="tx-amt negative">-₺432,00</div>
+              </div>
               <div class="tx-item">
                 <div class="tx-ic green">☕</div>
                 <div class="tx-info">
@@ -2617,6 +2656,21 @@
       t.innerHTML = '<span style="color:var(--kt)">✓</span> ' + msg;
       document.body.appendChild(t);
       setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400) }, 3000);
+    }
+
+    /* ═══════════════════════════════════════════
+       ÜNİVERSİTE SEÇİCİ
+    ═══════════════════════════════════════════ */
+    function setUni(name, btn) {
+      document.getElementById('uni-badge').textContent = name;
+      document.querySelectorAll('.uni-btn').forEach(b => {
+        b.style.border = '1px solid var(--border)';
+        b.style.background = 'transparent';
+        b.style.color = 'var(--muted)';
+      });
+      btn.style.border = '1px solid var(--kt)';
+      btn.style.background = 'rgba(22,160,134,.12)';
+      btn.style.color = 'var(--kt)';
     }
 
     /* ═══════════════════════════════════════════
