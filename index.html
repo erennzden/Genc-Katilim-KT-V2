@@ -1848,6 +1848,10 @@
         <span class="nav-ic">🎓</span> Finans Akademi
         <span class="nav-badge new">+50 pt</span>
       </a>
+      <a class="nav-item" data-panel="ingilizce" onclick="switchPanel('ingilizce',this)">
+        <span class="nav-ic">🗣️</span> İngilizce Kursu
+        <span class="nav-badge new">Ücretsiz</span>
+      </a>
       <a class="nav-item" data-panel="liga" onclick="switchPanel('liga',this)">
         <span class="nav-ic">🏆</span> Kampüs Ligi
       </a>
@@ -1975,19 +1979,6 @@
         <div class="panel-h">Finans <em style="font-style:italic;color:var(--ktl)">Akademi</em></div>
         <div class="panel-sub">Sertifikalı modülleri tamamla, puan kazan. Her video = gerçek hayata bir adım.</div>
 
-        <!-- İNGİLİZCE KURSU BANNER -->
-        <div style="margin-bottom:1.5rem;padding:1.2rem 1.5rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.2);border-left:3px solid var(--kt);border-radius:4px;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
-          <div style="font-size:2rem;flex-shrink:0;">🗣️</div>
-          <div style="flex:1;min-width:220px;">
-            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;flex-wrap:wrap;">
-              <span style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text)">Ücretsiz İngilizce Kursu</span>
-              <span style="font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--kt);background:rgba(22,160,134,.1);border:1px solid rgba(22,160,134,.2);border-radius:2px;padding:.15rem .45rem;">🌱 Sosyal Sorumluluk</span>
-            </div>
-            <div style="font-size:.78rem;color:var(--muted);line-height:1.55;">Kuveyt Türk personeline sunulan İngilizce eğitim programı, <strong style="color:var(--text)">Kampüs tanımındaki tüm öğrencilere ücretsiz</strong> açılıyor. Mevcut altyapı, gençler için yeni bir değere dönüşüyor.</div>
-          </div>
-          <button class="btn-watch" style="width:auto;padding:.65rem 1.4rem;flex-shrink:0;" onclick="showToast('İngilizce Kursuna kaydınız tamamlandı! Başlangıç içerikleri e-posta adresinize gönderildi.')">Kursa Kaydol →</button>
-        </div>
-
         <div class="akademi-layout">
           <div class="video-box">
             <div class="video-player" id="video-player" onclick="startVideo()">
@@ -2061,6 +2052,90 @@
               <div
                 style="font-family:var(--mono);font-size:.58rem;color:var(--kt);margin-top:.5rem;letter-spacing:.06em;">
                 2 / 6 TAMAMLANDI · 375 PUAN KAZANILDI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── İNGİLİZCE KURSU ── -->
+      <div class="panel" id="panel-ingilizce">
+        <div class="rule"></div>
+        <div class="panel-h">İngilizce <em style="font-style:italic;color:var(--ktl)">Kursu</em></div>
+        <div class="panel-sub">Kuveyt Türk personeline sunulan İngilizce eğitim programı, Kampüs Kart sahiplerine ücretsiz olarak açıldı.</div>
+
+        <div class="akademi-layout">
+          <!-- Sol: Aktif Ders -->
+          <div class="video-box">
+            <div class="video-player" id="eng-video-player" onclick="startEngVideo()">
+              <div class="video-thumb-overlay"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <button class="video-play-btn" id="eng-play-btn">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </button>
+                <div style="font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,.7);margin-top:.8rem;">Oynatmak için tıklayın</div>
+              </div>
+              <div class="video-progress-bar">
+                <div class="video-progress-fill" id="eng-vpf"></div>
+              </div>
+            </div>
+            <div class="video-meta">
+              <div class="video-episode">Seviye A1 · Ders 1</div>
+              <div class="video-title">Greetings & Introductions</div>
+              <div class="video-desc">Temel selamlama kalıpları, kendini tanıtma ve günlük iletişimde kullanılan ilk 50 ifade. Hem iş hem sosyal ortam için geçerli.</div>
+              <div class="video-reward">🎯 Bu dersi tamamlayın → +30 Kampüs Puanı</div>
+              <button class="btn-watch" onclick="startEngVideo()">▶ &nbsp;Derse Başla</button>
+            </div>
+          </div>
+
+          <!-- Sağ: Müfredat & Bilgi -->
+          <div>
+            <div style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--kt);margin-bottom:1rem;">Ders Programı</div>
+            <div class="course-list">
+              <div class="course-item" style="border-left:2px solid var(--kt)">
+                <div class="course-num">01</div>
+                <div class="course-t">Greetings & Introductions</div>
+                <div class="course-pt" style="color:var(--muted)">+30</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">02</div>
+                <div class="course-t">Daily Routines & Time</div>
+                <div class="course-pt" style="color:var(--muted)">+30</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">03</div>
+                <div class="course-t">Shopping & Numbers</div>
+                <div class="course-pt" style="color:var(--muted)">+30</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">04</div>
+                <div class="course-t">Travel & Directions</div>
+                <div class="course-pt" style="color:var(--muted)">+30</div>
+              </div>
+              <div class="course-item">
+                <div class="course-num">05</div>
+                <div class="course-t">Business English Basics</div>
+                <div class="course-pt" style="color:var(--muted)">+50</div>
+              </div>
+              <div class="course-item" style="opacity:.4">
+                <div class="course-num">06</div>
+                <div class="course-t">Interview & CV Preparation</div>
+                <div class="course-pt" style="color:var(--muted)">+50</div>
+              </div>
+            </div>
+
+            <div style="margin-top:1.2rem;padding:.9rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.12);border-radius:4px;">
+              <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;">Ders İlerlemesi</div>
+              <div class="progress-mini">
+                <div class="progress-mini-fill" style="width:0%"></div>
+              </div>
+              <div style="font-family:var(--mono);font-size:.58rem;color:var(--kt);margin-top:.5rem;letter-spacing:.06em;">0 / 6 TAMAMLANDI · BAŞLANMADI</div>
+            </div>
+
+            <div style="margin-top:1rem;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;">
+              <div style="font-family:var(--serif);font-size:.9rem;color:var(--text);margin-bottom:.5rem">💡 Nasıl Çalışır?</div>
+              <div style="font-size:.76rem;color:var(--muted);line-height:1.6;">
+                Kuveyt Türk'ün kurumsal İngilizce eğitim altyapısı, Kampüs Kart tanımındaki öğrencilere açılıyor. A1'den B2'ye kadar seviyeli dersler, konuşma pratiği ve iş İngilizcesi modülleri mevcut. Tüm dersler puan kazandırır.
+              </div>
             </div>
           </div>
         </div>
@@ -2215,9 +2290,9 @@
               </div>
               <div class="kc-chip"></div>
               <div class="kc-num">•••• &nbsp;•••• &nbsp;•••• &nbsp;7734</div>
-              <!-- Üniversite rozeti -->
-              <div style="position:absolute;top:.9rem;right:.9rem;display:flex;flex-direction:column;align-items:center;gap:.15rem;">
-                <div id="uni-badge" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.5rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:0;">İTÜ</div>
+              <!-- Üniversite logosu -->
+              <div style="position:absolute;top:.9rem;right:.9rem;">
+                <img id="uni-badge-img" src="deu.png" alt="Üniversite" style="width:30px;height:30px;border-radius:50%;object-fit:contain;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:3px;">
               </div>
               <div class="kc-bottom">
                 <div>
@@ -2232,12 +2307,19 @@
             <!-- Üniversite seçici -->
             <div style="margin-top:1rem;padding:.8rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:4px;">
               <div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;">Kart Tasarımı — Üniversiteniz</div>
-              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-                <button onclick="setUni('İTÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;" class="uni-btn active-uni">İTÜ</button>
-                <button onclick="setUni('BÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">BÜ</button>
-                <button onclick="setUni('ODTÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">ODTÜ</button>
-                <button onclick="setUni('KOÇ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">KOÇ</button>
-                <button onclick="setUni('SAÜ',this)" style="font-family:var(--mono);font-size:.62rem;padding:.3rem .75rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;" class="uni-btn">SAÜ</button>
+              <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
+                <button onclick="setUni('deu.png','DEÜ',this)" class="uni-btn active-uni" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;">
+                  <img src="deu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="DEÜ"> DEÜ
+                </button>
+                <button onclick="setUni('odtu.png','ODTÜ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                  <img src="odtu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="ODTÜ"> ODTÜ
+                </button>
+                <button onclick="setUni('itu.png','İTÜ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                  <img src="itu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="İTÜ"> İTÜ
+                </button>
+                <button onclick="setUni('koc.png','KOÇ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                  <img src="koc.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="KOÇ"> KOÇ
+                </button>
               </div>
             </div>
 
@@ -2257,8 +2339,7 @@
                 <div class="bal-val g">₺127,50</div>
                 <div class="bal-sub">Kampüs kafelerinden</div>
               </div>
-              <div class="bal-card" style="border-color:rgba(22,160,134,.25);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:.5rem;right:.5rem;font-family:var(--mono);font-size:.44rem;letter-spacing:.08em;color:var(--kt);background:rgba(22,160,134,.1);border:1px solid rgba(22,160,134,.2);border-radius:2px;padding:.1rem .35rem;">🌱 SOS. SOR.</div>
+              <div class="bal-card">
                 <div class="bal-label">Spor Cashback</div>
                 <div class="bal-val g">₺43,20</div>
                 <div class="bal-sub">Spor salonu üyeliği</div>
@@ -2272,7 +2353,7 @@
                 <div class="tx-ic green">🏋️</div>
                 <div class="tx-info">
                   <div class="tx-name">Spor Salonu — Aylık Üyelik</div>
-                  <div class="tx-date">Bugün · 09:00 · Cashback +₺43,20 🌱</div>
+                  <div class="tx-date">Bugün · 09:00 · Cashback +₺43,20</div>
                 </div>
                 <div class="tx-amt negative">-₺432,00</div>
               </div>
@@ -2541,6 +2622,7 @@
     const pageTitles = {
       home: 'Ana Panel',
       akademi: 'Finans Akademi',
+      ingilizce: 'İngilizce Kursu',
       liga: 'Kampüs Ligi',
       ulasim: 'Ulaşım & Kampüs Kart',
       kariyer: 'Kariyer & Staj',
@@ -2659,10 +2741,38 @@
     }
 
     /* ═══════════════════════════════════════════
+       İNGİLİZCE KURSU VİDEO SİMÜLASYONU
+    ═══════════════════════════════════════════ */
+    let engPlaying = false;
+    let engInterval = null;
+    let engProgress = 0;
+    let engDone = false;
+
+    function startEngVideo() {
+      if (engDone || engPlaying) return;
+      engPlaying = true;
+      const btn = document.getElementById('eng-play-btn');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+      engInterval = setInterval(() => {
+        engProgress += 100 / 85;
+        if (engProgress >= 100) {
+          engProgress = 100;
+          clearInterval(engInterval);
+          engPlaying = false;
+          engDone = true;
+          document.getElementById('eng-vpf').style.width = '100%';
+          setTimeout(() => showKonfeti(30), 400);
+        }
+        document.getElementById('eng-vpf').style.width = engProgress + '%';
+      }, 80);
+    }
+
+    /* ═══════════════════════════════════════════
        ÜNİVERSİTE SEÇİCİ
     ═══════════════════════════════════════════ */
-    function setUni(name, btn) {
-      document.getElementById('uni-badge').textContent = name;
+    function setUni(imgSrc, name, btn) {
+      document.getElementById('uni-badge-img').src = imgSrc;
+      document.getElementById('uni-badge-img').alt = name;
       document.querySelectorAll('.uni-btn').forEach(b => {
         b.style.border = '1px solid var(--border)';
         b.style.background = 'transparent';
