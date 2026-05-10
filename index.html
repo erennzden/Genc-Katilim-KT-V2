@@ -2769,15 +2769,10 @@
         <div class="panel-sub">Tek kart, tüm şehir. Ulaşım bakiyeniz ve cashback kazanımlarınız tek ekranda.</div>
         <div class="ulasim-layout">
           <div class="card-3d-wrapper">
-            <!-- Gerçek kart görseli (yatay) + üniversite logosu overlay -->
-            <div
-              style="position:relative;width:100%;max-width:320px;height:202px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);">
-              <img src="kampus_kart.png" alt="Kampüs Kart"
-                style="position:absolute;inset:0;margin:auto;width:202px;height:320px;transform:rotate(90deg);object-fit:cover;">
-              <div
-                style="position:absolute;top:10%;right:4%;width:52px;height:52px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;">
-                <img id="uni-badge-img" src="deu.png" alt="Üniversite" style="width:78%;height:78%;object-fit:contain;">
-              </div>
+            <!-- Gerçek kart görseli (yatay) -->
+            <div style="display:flex;justify-content:center;align-items:center;overflow:visible;margin-bottom:1.5rem;">
+              <img id="kampus-kart-img" src="deu_kart.png" alt="DEÜ Kampüs Kart"
+                style="width:216px;height:340px;transform:rotate(90deg);margin:-62px 0;object-fit:cover;transition:opacity .3s ease;filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));">
             </div>
             <!-- Üniversite seçici -->
             <div
@@ -2786,20 +2781,20 @@
                 style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;">
                 Kart Tasarımı — Üniversiteniz</div>
               <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
-                <button onclick="setUni('deu.png','DEÜ',this)" class="uni-btn active-uni"
+                <button onclick="setUni('deu.png','deu_kart.png','DEÜ',this)" class="uni-btn active-uni"
                   style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;">
                   <img src="deu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="DEÜ"> DEÜ
                 </button>
-                <button onclick="setUni('odtu.png','ODTÜ',this)" class="uni-btn"
+                <button onclick="setUni('odtu.png','odtu_kart.png','ODTÜ',this)" class="uni-btn"
                   style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
                   <img src="odtu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="ODTÜ">
                   ODTÜ
                 </button>
-                <button onclick="setUni('itu.png','İTÜ',this)" class="uni-btn"
+                <button onclick="setUni('itu.png','itu_kart.png','İTÜ',this)" class="uni-btn"
                   style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
                   <img src="itu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="İTÜ"> İTÜ
                 </button>
-                <button onclick="setUni('koc.png','KOÇ',this)" class="uni-btn"
+                <button onclick="setUni('koc.png','koc_kart.png','KOÇ',this)" class="uni-btn"
                   style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
                   <img src="koc.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="KOÇ"> KOÇ
                 </button>
@@ -3259,9 +3254,16 @@
     /* ═══════════════════════════════════════════
        ÜNİVERSİTE SEÇİCİ
     ═══════════════════════════════════════════ */
-    function setUni(imgSrc, name, btn) {
-      document.getElementById('uni-badge-img').src = imgSrc;
-      document.getElementById('uni-badge-img').alt = name;
+    function setUni(logoSrc, kartSrc, name, btn) {
+      // Swap the main card image with a smooth fade
+      const kartImg = document.getElementById('kampus-kart-img');
+      kartImg.style.opacity = '0';
+      setTimeout(() => {
+        kartImg.src = kartSrc;
+        kartImg.alt = name + ' Kampüs Kart';
+        kartImg.style.opacity = '1';
+      }, 250);
+      // Update button states
       document.querySelectorAll('.uni-btn').forEach(b => {
         b.style.border = '1px solid var(--border)';
         b.style.background = 'transparent';
