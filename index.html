@@ -617,7 +617,6 @@
     .qa-item {
       display: flex;
       align-items: center;
-      gap.8rem;
       gap: .8rem;
       padding: .85rem 1rem;
       background: var(--card);
@@ -1778,6 +1777,479 @@
       opacity: .3;
       margin-bottom: 1.2rem
     }
+
+    /* ─── Mobile hamburger toggle ─── */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--kt);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: .4rem;
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       MOBILE RESPONSIVE
+    ═══════════════════════════════════════════ */
+
+    /* Hide custom cursor on touch devices */
+    @media (pointer: coarse) {
+
+      #cur,
+      #curl {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto !important;
+      }
+
+      .nav-item,
+      .home-card,
+      .qa-item,
+      .staj-card,
+      .course-item,
+      .lb-row,
+      .tx-item,
+      .prize-card,
+      .btn-login,
+      .btn-watch,
+      .btn-apply,
+      .btn-submit,
+      .konfeti-close,
+      .video-play-btn,
+      .form-select {
+        cursor: pointer !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      /* ─── Base ─── */
+      html {
+        font-size: 15px;
+      }
+
+      body {
+        overflow: auto;
+        height: auto;
+        cursor: auto;
+      }
+
+      #cur,
+      #curl {
+        display: none !important;
+      }
+
+      /* ─── Login ─── */
+      .login-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.8rem 1.4rem;
+        margin: 0 1rem;
+        border-radius: 12px;
+      }
+
+      .login-h {
+        font-size: 1.5rem;
+      }
+
+      .login-sub {
+        font-size: .78rem;
+      }
+
+      .login-logo {
+        gap: .7rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .login-logo img {
+        height: 22px;
+      }
+
+      .login-logo-name {
+        font-size: .88rem;
+      }
+
+      .login-note {
+        font-size: .56rem;
+      }
+
+      /* ─── Dashboard Grid → stacked with bottom nav ─── */
+      #dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: 52px 1fr;
+        grid-template-areas:
+          "topbar"
+          "content";
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 72px;
+        /* space for bottom nav */
+      }
+
+      /* ─── Sidebar → Bottom Navigation ─── */
+      #sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        z-index: 100;
+        flex-direction: row;
+        padding: 0;
+        border-right: none;
+        border-top: 1px solid var(--border);
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        background: var(--surface);
+        height: 68px;
+        gap: 0;
+        scrollbar-width: none;
+      }
+
+      #sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .sb-brand,
+      .sb-section-label,
+      .sb-footer {
+        display: none !important;
+      }
+
+      .nav-item {
+        flex-direction: column;
+        gap: .25rem;
+        padding: .5rem .7rem;
+        font-size: .6rem;
+        white-space: nowrap;
+        border-left: none;
+        border-top: 2px solid transparent;
+        min-width: 64px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+      }
+
+      .nav-item.active {
+        border-left-color: transparent;
+        border-top-color: var(--kt);
+      }
+
+      .nav-item .nav-ic {
+        font-size: 1.2rem;
+        width: auto;
+      }
+
+      .nav-badge {
+        display: none;
+      }
+
+      /* ─── Topbar ─── */
+      #topbar {
+        padding: 0 1rem;
+        height: 52px;
+      }
+
+      .tb-page-title {
+        font-size: .95rem;
+      }
+
+      .kt-score-pill {
+        display: none;
+      }
+
+      .user-name {
+        display: none;
+      }
+
+      .user-av {
+        width: 28px;
+        height: 28px;
+        font-size: .55rem;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      /* ─── Content ─── */
+      #content {
+        padding: 1.2rem 1rem;
+        overflow-y: auto;
+      }
+
+      /* ─── Panel Headers ─── */
+      .panel-h {
+        font-size: 1.5rem;
+      }
+
+      .panel-sub {
+        font-size: .78rem;
+        margin-bottom: 1.2rem;
+      }
+
+      /* ─── Home Grid ─── */
+      .home-grid {
+        grid-template-columns: 1fr;
+        gap: .8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .home-card {
+        padding: 1.2rem;
+      }
+
+      .home-card-n {
+        font-size: 1.6rem;
+      }
+
+      .home-card-lbl {
+        font-size: .74rem;
+      }
+
+      .home-row {
+        grid-template-columns: 1fr;
+        gap: .8rem;
+      }
+
+      /* ─── Akademi Layout ─── */
+      .akademi-layout {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      /* ─── Liga Layout ─── */
+      .liga-layout {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .lb-head,
+      .lb-row {
+        grid-template-columns: 32px 1fr 60px 55px;
+        padding: .6rem .8rem;
+        gap: .3rem;
+      }
+
+      .lb-rank {
+        font-size: 1rem;
+      }
+
+      .lb-pts {
+        font-size: .95rem;
+      }
+
+      .lb-uname {
+        font-size: .78rem;
+      }
+
+      .lb-usub {
+        font-size: .5rem;
+      }
+
+      .lb-league {
+        font-size: .48rem;
+        padding: .15rem .35rem;
+      }
+
+      /* ─── Ulaşım Layout ─── */
+      .ulasim-layout {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .balance-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem;
+      }
+
+      .bal-val {
+        font-size: 1.2rem;
+      }
+
+      .bal-label {
+        font-size: .52rem;
+      }
+
+      /* ─── Kariyer Layout ─── */
+      .kariyer-layout {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .staj-card {
+        padding: 1rem 1.2rem;
+      }
+
+      .staj-title {
+        font-size: .95rem;
+      }
+
+      /* ─── Rapor Grid ─── */
+      .rapor-grid {
+        grid-template-columns: 1fr;
+        gap: .8rem;
+      }
+
+      .rapor-card {
+        padding: 1.2rem;
+      }
+
+      .rapor-n {
+        font-size: 1.8rem;
+      }
+
+      /* ─── Sponsorluk Form ─── */
+      .sponsor-form-box {
+        padding: 1.2rem;
+      }
+
+      /* ─── Video Player ─── */
+      .video-play-btn {
+        width: 50px;
+        height: 50px;
+      }
+
+      .video-play-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .video-meta {
+        padding: 1rem;
+      }
+
+      .video-title {
+        font-size: 1.05rem;
+      }
+
+      /* ─── Konfeti Popup ─── */
+      .konfeti-popup {
+        width: 85vw;
+        max-width: 320px;
+        padding: 2rem 1.5rem;
+      }
+
+      .konfeti-h {
+        font-size: 1.4rem;
+      }
+
+      .konfeti-pt {
+        font-size: 2.2rem;
+      }
+
+      .konfeti-sub {
+        font-size: .74rem;
+      }
+
+      /* ─── Course items ─── */
+      .course-item {
+        padding: .8rem 1rem;
+        gap: .6rem;
+      }
+
+      .course-num {
+        font-size: .55rem;
+      }
+
+      .course-t {
+        font-size: .76rem;
+      }
+
+      .course-pt {
+        font-size: .82rem;
+      }
+
+      /* ─── Card Visual (Ulaşım) ─── */
+      .card-3d-wrapper {
+        padding: 1rem;
+      }
+
+      .kt-card-vis {
+        padding: 1rem;
+        max-width: 280px;
+      }
+
+      .kc-num {
+        font-size: .65rem;
+      }
+
+      /* ─── Quick Actions ─── */
+      .qa-item {
+        padding: .75rem .8rem;
+        font-size: .78rem;
+      }
+
+      /* ─── Transactions ─── */
+      .tx-item {
+        padding: .7rem .8rem;
+        gap: .7rem;
+      }
+
+      .tx-name {
+        font-size: .78rem;
+      }
+
+      .tx-date {
+        font-size: .52rem;
+      }
+
+      .tx-amt {
+        font-size: .88rem;
+      }
+
+      .tx-ic {
+        width: 30px;
+        height: 30px;
+        font-size: .8rem;
+      }
+
+      /* ─── Toast ─── */
+      /* Override inline styles via specificity isn't possible,
+         but toast is dynamically created so handled in JS */
+    }
+
+    /* Extra small screens */
+    @media (max-width: 380px) {
+      .login-box {
+        margin: 0 .5rem;
+        padding: 1.5rem 1rem;
+      }
+
+      .login-h {
+        font-size: 1.3rem;
+      }
+
+      .balance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lb-head,
+      .lb-row {
+        grid-template-columns: 28px 1fr 50px;
+      }
+
+      .lb-head div:last-child,
+      .lb-row div:last-child {
+        display: none;
+      }
+
+      .rapor-n {
+        font-size: 1.5rem;
+      }
+
+      .nav-item {
+        min-width: 56px;
+        font-size: .55rem;
+        padding: .4rem .5rem;
+      }
+    }
   </style>
 </head>
 
@@ -1796,7 +2268,8 @@
       <div class="konfeti-pt" id="konfeti-pts">+50</div>
       <div style="font-family:var(--mono);font-size:.65rem;color:var(--kt);letter-spacing:.12em;margin-top:.3rem">KAMPÜS
         PUANI</div>
-      <div class="konfeti-sub">Katılım Bankacılığı 101 modülünü tamamladınız.<br>Toplam puanınız güncellendi.</div>
+      <div class="konfeti-sub" id="konfeti-sub">Katılım Bankacılığı 101 modülünü tamamladınız.<br>Toplam puanınız
+        güncellendi.</div>
       <button class="konfeti-close" onclick="closeKonfeti()">Devam Et →</button>
     </div>
   </div>
@@ -2061,7 +2534,8 @@
       <div class="panel" id="panel-ingilizce">
         <div class="rule"></div>
         <div class="panel-h">İngilizce <em style="font-style:italic;color:var(--ktl)">Kursu</em></div>
-        <div class="panel-sub">Kuveyt Türk personeline sunulan İngilizce eğitim programı, Kampüs Kart sahiplerine ücretsiz olarak açıldı.</div>
+        <div class="panel-sub">Kuveyt Türk personeline sunulan İngilizce eğitim programı, Kampüs Kart sahiplerine
+          ücretsiz olarak açıldı.</div>
 
         <div class="akademi-layout">
           <!-- Sol: Aktif Ders -->
@@ -2070,9 +2544,12 @@
               <div class="video-thumb-overlay"></div>
               <div style="position:relative;z-index:2;text-align:center;">
                 <button class="video-play-btn" id="eng-play-btn">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
                 </button>
-                <div style="font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,.7);margin-top:.8rem;">Oynatmak için tıklayın</div>
+                <div style="font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,.7);margin-top:.8rem;">
+                  Oynatmak için tıklayın</div>
               </div>
               <div class="video-progress-bar">
                 <div class="video-progress-fill" id="eng-vpf"></div>
@@ -2081,7 +2558,8 @@
             <div class="video-meta">
               <div class="video-episode">Seviye A1 · Ders 1</div>
               <div class="video-title">Greetings & Introductions</div>
-              <div class="video-desc">Temel selamlama kalıpları, kendini tanıtma ve günlük iletişimde kullanılan ilk 50 ifade. Hem iş hem sosyal ortam için geçerli.</div>
+              <div class="video-desc">Temel selamlama kalıpları, kendini tanıtma ve günlük iletişimde kullanılan ilk 50
+                ifade. Hem iş hem sosyal ortam için geçerli.</div>
               <div class="video-reward">🎯 Bu dersi tamamlayın → +30 Kampüs Puanı</div>
               <button class="btn-watch" onclick="startEngVideo()">▶ &nbsp;Derse Başla</button>
             </div>
@@ -2089,7 +2567,8 @@
 
           <!-- Sağ: Müfredat & Bilgi -->
           <div>
-            <div style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--kt);margin-bottom:1rem;">Ders Programı</div>
+            <div style="font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--kt);margin-bottom:1rem;">
+              Ders Programı</div>
             <div class="course-list">
               <div class="course-item" style="border-left:2px solid var(--kt)">
                 <div class="course-num">01</div>
@@ -2123,18 +2602,25 @@
               </div>
             </div>
 
-            <div style="margin-top:1.2rem;padding:.9rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.12);border-radius:4px;">
+            <div
+              style="margin-top:1.2rem;padding:.9rem;background:rgba(22,160,134,.04);border:1px solid rgba(22,160,134,.12);border-radius:4px;">
               <div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;">Ders İlerlemesi</div>
               <div class="progress-mini">
                 <div class="progress-mini-fill" style="width:0%"></div>
               </div>
-              <div style="font-family:var(--mono);font-size:.58rem;color:var(--kt);margin-top:.5rem;letter-spacing:.06em;">0 / 6 TAMAMLANDI · BAŞLANMADI</div>
+              <div
+                style="font-family:var(--mono);font-size:.58rem;color:var(--kt);margin-top:.5rem;letter-spacing:.06em;">
+                0 / 6 TAMAMLANDI · BAŞLANMADI</div>
             </div>
 
-            <div style="margin-top:1rem;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;">
-              <div style="font-family:var(--serif);font-size:.9rem;color:var(--text);margin-bottom:.5rem">💡 Nasıl Çalışır?</div>
+            <div
+              style="margin-top:1rem;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;">
+              <div style="font-family:var(--serif);font-size:.9rem;color:var(--text);margin-bottom:.5rem">💡 Nasıl
+                Çalışır?</div>
               <div style="font-size:.76rem;color:var(--muted);line-height:1.6;">
-                Kuveyt Türk'ün kurumsal İngilizce eğitim altyapısı, Kampüs Kart tanımındaki öğrencilere açılıyor. A1'den B2'ye kadar seviyeli dersler, konuşma pratiği ve iş İngilizcesi modülleri mevcut. Tüm dersler puan kazandırır.
+                Kuveyt Türk'ün kurumsal İngilizce eğitim altyapısı, Kampüs Kart tanımındaki öğrencilere açılıyor. A1'den
+                B2'ye kadar seviyeli dersler, konuşma pratiği ve iş İngilizcesi modülleri mevcut. Tüm dersler puan
+                kazandırır.
               </div>
             </div>
           </div>
@@ -2284,27 +2770,37 @@
         <div class="ulasim-layout">
           <div class="card-3d-wrapper">
             <!-- Gerçek kart görseli (yatay) + üniversite logosu overlay -->
-            <div style="position:relative;width:100%;max-width:320px;height:202px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);">
+            <div
+              style="position:relative;width:100%;max-width:320px;height:202px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);">
               <img src="kampus_kart.png" alt="Kampüs Kart"
-                   style="position:absolute;inset:0;margin:auto;width:202px;height:320px;transform:rotate(90deg);object-fit:cover;">
-              <div style="position:absolute;top:10%;right:4%;width:52px;height:52px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;">
+                style="position:absolute;inset:0;margin:auto;width:202px;height:320px;transform:rotate(90deg);object-fit:cover;">
+              <div
+                style="position:absolute;top:10%;right:4%;width:52px;height:52px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;">
                 <img id="uni-badge-img" src="deu.png" alt="Üniversite" style="width:78%;height:78%;object-fit:contain;">
               </div>
             </div>
             <!-- Üniversite seçici -->
-            <div style="margin-top:1rem;padding:.8rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:4px;">
-              <div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;">Kart Tasarımı — Üniversiteniz</div>
+            <div
+              style="margin-top:1rem;padding:.8rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:4px;">
+              <div
+                style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;">
+                Kart Tasarımı — Üniversiteniz</div>
               <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
-                <button onclick="setUni('deu.png','DEÜ',this)" class="uni-btn active-uni" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;">
+                <button onclick="setUni('deu.png','DEÜ',this)" class="uni-btn active-uni"
+                  style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--kt);background:rgba(22,160,134,.12);color:var(--kt);cursor:none;transition:all .2s;">
                   <img src="deu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="DEÜ"> DEÜ
                 </button>
-                <button onclick="setUni('odtu.png','ODTÜ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
-                  <img src="odtu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="ODTÜ"> ODTÜ
+                <button onclick="setUni('odtu.png','ODTÜ',this)" class="uni-btn"
+                  style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                  <img src="odtu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="ODTÜ">
+                  ODTÜ
                 </button>
-                <button onclick="setUni('itu.png','İTÜ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                <button onclick="setUni('itu.png','İTÜ',this)" class="uni-btn"
+                  style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
                   <img src="itu.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="İTÜ"> İTÜ
                 </button>
-                <button onclick="setUni('koc.png','KOÇ',this)" class="uni-btn" style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
+                <button onclick="setUni('koc.png','KOÇ',this)" class="uni-btn"
+                  style="display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.62rem;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all .2s;">
                   <img src="koc.png" style="width:16px;height:16px;border-radius:50%;object-fit:contain;" alt="KOÇ"> KOÇ
                 </button>
               </div>
@@ -2578,12 +3074,15 @@
 
   <script>
     /* ═══════════════════════════════════════════
-       CURSOR
+       CURSOR (desktop only)
     ═══════════════════════════════════════════ */
+    const isMobile = window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window;
     const cur = document.getElementById('cur'), curl = document.getElementById('curl');
     let mx = 0, my = 0, lx = 0, ly = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
-    (function al() { lx += (mx - lx) * .1; ly += (my - ly) * .1; curl.style.left = lx + 'px'; curl.style.top = ly + 'px'; requestAnimationFrame(al) })();
+    if (!isMobile) {
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+      (function al() { lx += (mx - lx) * .1; ly += (my - ly) * .1; curl.style.left = lx + 'px'; curl.style.top = ly + 'px'; requestAnimationFrame(al) })();
+    }
 
     /* ═══════════════════════════════════════════
        LOGIN
@@ -2660,10 +3159,11 @@
     ═══════════════════════════════════════════ */
     let currentScore = 1250;
 
-    function showKonfeti(pts) {
+    function showKonfeti(pts, msg) {
       currentScore += pts;
       document.getElementById('konfeti-pts').textContent = '+' + pts;
       document.getElementById('score-display').textContent = currentScore.toLocaleString('tr') + ' PT';
+      if (msg) document.getElementById('konfeti-sub').innerHTML = msg + '<br>Toplam puanınız güncellendi.';
       document.getElementById('konfeti-overlay').classList.add('show');
       spawnConfetti();
     }
@@ -2721,7 +3221,9 @@
     ═══════════════════════════════════════════ */
     function showToast(msg) {
       const t = document.createElement('div');
-      t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid rgba(22,160,134,.3);border-radius:4px;padding:.8rem 1.2rem;font-size:.8rem;color:var(--text);z-index:9999;animation:panelIn .3s ease;box-shadow:0 20px 40px rgba(0,0,0,.4);display:flex;align-items:center;gap:.6rem;font-family:var(--sans);';
+      const mobile = window.matchMedia('(max-width: 768px)').matches;
+      const pos = mobile ? 'bottom:5rem;left:50%;transform:translateX(-50%);right:auto;max-width:90vw;' : 'bottom:2rem;right:2rem;';
+      t.style.cssText = 'position:fixed;' + pos + 'background:var(--surface);border:1px solid rgba(22,160,134,.3);border-radius:4px;padding:.8rem 1.2rem;font-size:.8rem;color:var(--text);z-index:9999;animation:panelIn .3s ease;box-shadow:0 20px 40px rgba(0,0,0,.4);display:flex;align-items:center;gap:.6rem;font-family:var(--sans);';
       t.innerHTML = '<span style="color:var(--kt)">✓</span> ' + msg;
       document.body.appendChild(t);
       setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400) }, 3000);
@@ -2748,7 +3250,7 @@
           engPlaying = false;
           engDone = true;
           document.getElementById('eng-vpf').style.width = '100%';
-          setTimeout(() => showKonfeti(30), 400);
+          setTimeout(() => showKonfeti(30, 'Greetings & Introductions dersini tamamladınız.'), 400);
         }
         document.getElementById('eng-vpf').style.width = engProgress + '%';
       }, 80);
